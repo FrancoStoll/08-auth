@@ -25,7 +25,7 @@ export class JwtAdapter {
 
     }
 
-    public static validateToken(token: string) {
+    public static validateToken<T>(token: string): Promise<T | null> {
 
 
         return new Promise((resolve) => {
@@ -33,7 +33,7 @@ export class JwtAdapter {
             jwt.verify(token, JWT_SEED, (err, decoded) => {
                 if (err) return resolve(null);
 
-                resolve(decoded);
+                resolve(decoded as T);
             });
 
         });
